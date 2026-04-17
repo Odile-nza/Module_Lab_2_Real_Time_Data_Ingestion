@@ -6,49 +6,6 @@ This project builds a real-time data ingestion pipeline that simulates an e-comm
 
 ---
 
-## System Architecture
-
-```
-┌─────────────────────┐        CSV files         ┌──────────────────────────┐
-│                     │  ──────────────────────►  │                          │
-│  data_generator.py  │   (every 3 seconds)       │   data/landing/  folder  │
-│                     │                           │                          │
-│  Generates 20 fake  │                           │  Spark watches this      │
-│  events per batch   │                           │  folder continuously     │
-│  using Faker        │                           │                          │
-└─────────────────────┘                           └────────────┬─────────────┘
-                                                               │
-                                                               │ readStream
-                                                               ▼
-                                                  ┌────────────────────────────┐
-                                                  │                            │
-                                                  │  Spark Structured          │
-                                                  │  Streaming                 │
-                                                  │                            │
-                                                  │  • Read CSV with schema    │
-                                                  │  • Parse timestamp         │
-                                                  │  • Filter invalid rows     │
-                                                  │  • Round financials        │
-                                                  │  • Add ingested_at         │
-                                                  │                            │
-                                                  └────────────┬───────────────┘
-                                                               │
-                                                               │ foreachBatch (JDBC)
-                                                               ▼
-                                                  ┌────────────────────────────┐
-                                                  │                            │
-                                                  │  PostgreSQL                │
-                                                  │  ecommerce_streaming DB    │
-                                                  │  user_events table         │
-                                                  │                            │
-                                                  │  PRIMARY KEY on event_id   │
-                                                  │  → idempotent writes       │
-                                                  │                            │
-                                                  └────────────────────────────┘
-```
-
----
-
 ## Components
 
 ### 1. `data_generator.py` — Data Source
