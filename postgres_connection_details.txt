@@ -1,0 +1,16 @@
+# ============================================================
+# PostgreSQL Connection Details
+# ============================================================
+# Update these values to match your PostgreSQL installation.
+# Never commit this file to GitHub if it contains real passwords.
+# Add it to .gitignore.
+# ============================================================
+
+Host:     ep-twilight-rice-amvry1m8-pooler.c-5.us-east-1.aws.neon.tech
+Port:     5432
+Database: neondb
+User:     neondb_owner
+Password: your_password
+SSL:      required
+
+JDBC URL: jdbc:postgresql://ep-twilight-rice-amvry1m8-pooler.c-5.us-east-1.aws.neon.tech/neondb?sslmode=require
