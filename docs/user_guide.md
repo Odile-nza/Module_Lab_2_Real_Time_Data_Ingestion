@@ -18,8 +18,8 @@ Before running the project, ensure the following are installed:
 ## Step 1 — Clone and Set Up the Project
 
 ```bash
-git clone https://github.com/yourname/ecommerce-streaming.git
-cd ecommerce-streaming
+git clone https://github.com/Odile-nza/Module_Lab_2_Real_Time_Data_Ingestion.git
+cd Module_Lab_2_Real_Time_Data_Ingestion
 
 python -m venv venv
 source venv/bin/activate        # Mac/Linux
